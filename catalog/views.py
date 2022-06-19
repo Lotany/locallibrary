@@ -16,6 +16,8 @@ def index(request):
 
     # The 'all()' is implied by default.
     num_authors = Author.objects.count()
+    num_visits=request.session.get('num_visits',0)
+    request.session['num_visits'] = num_visits + 1
 
     context = {
         'num_books': num_books,
@@ -23,6 +25,7 @@ def index(request):
         'num_instances': num_instances,
         'num_instances_available': num_instances_available,
         'num_authors': num_authors,
+        'num_visits':num_visits,
     }
 
     # Render the HTML template index.html with the data in the context variable
